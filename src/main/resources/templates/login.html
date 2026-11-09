@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>로그인 - Mirae 판매 관리</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="bg-body-tertiary">
+<main class="login-main d-flex align-items-center justify-content-center">
+    <div class="card shadow-sm login-card">
+        <div class="card-body p-4">
+            <h1 class="h4 text-center mb-4">Mirae 판매 관리</h1>
+
+            <div class="alert alert-info" role="status" th:if="${notice}" th:text="${notice}"
+                 data-testid="login-notice-message">안내</div>
+
+            <form th:action="@{/login}" method="post" data-testid="login-form" novalidate>
+                <div class="mb-3">
+                    <label for="loginId" class="form-label">아이디</label>
+                    <input type="text" class="form-control" id="loginId" name="loginId" th:value="${loginId}"
+                           autocomplete="username" required autofocus data-testid="login-id-input">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="password" name="password" value=""
+                           autocomplete="current-password" required data-testid="login-password-input">
+                </div>
+                <input type="hidden" name="redirect" th:if="${redirect}" th:value="${redirect}">
+                <button type="submit" class="btn btn-primary w-100" data-testid="login-submit-button">로그인</button>
+                <div class="alert alert-danger mt-3 mb-0" role="alert" th:if="${error}" th:text="${error}"
+                     data-testid="login-error-message">오류</div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

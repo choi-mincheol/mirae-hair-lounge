@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: page(title='오류', activeMenu='', content=~{::content})}">
+<body>
+<section th:fragment="content">
+    <h1 class="h3">오류</h1>
+    <p data-testid="error-message">처리 중 문제가 생겼습니다. 잠시 후 다시 시도해 주세요.</p>
+    <a class="btn btn-primary" th:href="@{/}" data-testid="error-home-link">대시보드로</a>
+</section>
+</body>
+</html>

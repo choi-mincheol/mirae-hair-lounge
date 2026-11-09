@@ -1,0 +1,8 @@
+# 개발용 프로필입니다. 뼈대 확인을 위해 예시 분류·상품 1건을 넣습니다(이미 있으면 넣지 않음).
+# 실행 예: SPRING_PROFILES_ACTIVE=dev ./gradlew bootRun
+spring:
+  sql:
+    init:
+      data-locations: classpath:data-dev.sql
+  thymeleaf:
+    cache: false

@@ -11,7 +11,7 @@ B. 중간: `auth`(로그인·직원 계정), `product`(상품·옵션·분류·�
 C. 처음 정한 네 개만: `product`(상품·재고·입고), `sale`(거래처·판매·할부·입금·요청), `report`, `auth`, `common`
 X. Other (please specify)
 
-[Answer]:
+[Answer]: B
 
 ## Q2. [아키텍트] 현재 재고 보관 방식
 
@@ -21,7 +21,7 @@ A. 옵션마다 "현재 재고" 숫자를 두고, 바뀔 때마다 변동 내역
 B. 현재 재고 숫자는 두지 않고, 변동 내역의 합계로 매번 계산한다(동시 판매는 옵션 단위 잠금으로 막는다)
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q3. [보안 엔지니어] 로그인 토큰(JWT) 보관과 CSRF 방어
 
@@ -31,7 +31,7 @@ A. JWT를 `HttpOnly`, `SameSite=Strict` 쿠키에 담고, 상태를 바꾸는 �
 B. JWT를 `HttpOnly`, `SameSite=Strict` 쿠키에 담고, CSRF 토큰은 쓰지 않는다(이 앱은 `127.0.0.1`에서만 열리고 `SameSite=Strict`가 다른 사이트에서 오는 요청을 막는다고 본다)
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q4. [보안 엔지니어] 로그인 8시간 만료 방식
 
@@ -41,7 +41,7 @@ A. 요청이 올 때마다(남은 시간이 일정 이하일 때) 새 JWT를 발
 B. 로그인한 뒤 8시간이 지나면 활동과 관계없이 만료한다(요구사항 FR1.5를 "로그인 후 8시간"으로 바꿈)
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q5. [제품 관리자] 금액을 고친 뒤 0원 회차가 생기는 경우
 
@@ -52,7 +52,7 @@ B. 0원 회차가 생기는 수정은 모두 거부한다(남은 금액 0원 포
 C. 0원 회차는 자동으로 "입금 완료(0원)"로 처리한다
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q6. [제품 관리자] 할부 첫 예정일 규칙
 
@@ -63,7 +63,7 @@ B. 첫 예정일은 오늘과 같거나 뒤인 날짜만 받는다. 수정 규�
 C. 첫 예정일은 입력받지 않고 늘 판매일의 다음 달 같은 날로 정한다. 판매 일시를 고치면(입금 기록이 없을 때) 예정일도 다시 계산한다
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q7. [아키텍트] 직원 요청과 변경 이력 저장 방식
 
@@ -73,7 +73,7 @@ A. 요청에는 바꾼 뒤의 판매 내용(품목, 수량, 할인, 결제 수�
 B. 요청 품목, 이력 품목을 판매와 같은 모양의 별도 테이블들로 저장한다
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A
 
 ## Q8. [개발자] Spring Boot 버전을 고르는 기준
 
@@ -83,4 +83,4 @@ A. Java 25를 공식 지원하는 가장 최신 안정판 Spring Boot를 쓰고,
 B. 자료가 많은 Spring Boot 3.x의 마지막 판(3.5.x)을 쓰되, Java 25에서 빌드와 테스트가 통과하는지 Code Generation에서 확인한다
 X. Other (please specify)
 
-[Answer]:
+[Answer]: A

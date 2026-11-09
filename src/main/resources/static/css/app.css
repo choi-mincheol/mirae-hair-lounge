@@ -1,0 +1,118 @@
+/* 이 앱의 CSS입니다. Bootstrap에 없는 모양만 둡니다(design-system-mapping.md 4절). */
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Malgun Gothic",
+        "Apple SD Gothic Neo", sans-serif;
+}
+
+/* 왼쪽 메뉴: 폭 220px, 연한 회색, 지금 메뉴는 왼쪽 4px 막대와 굵은 글씨 */
+.app-sidebar {
+    background-color: #f8f9fa;
+}
+
+@media (min-width: 992px) {
+    .app-sidebar {
+        width: 220px;
+        min-height: calc(100vh - 57px);
+        flex-shrink: 0;
+        border-right: 1px solid #dee2e6;
+    }
+}
+
+.app-sidebar .nav-link {
+    color: #212529;
+    border-left: 4px solid transparent;
+    padding-left: 1rem;
+}
+
+.app-sidebar .nav-link.active {
+    font-weight: 700;
+    border-left-color: var(--bs-primary);
+    background-color: #e9ecef;
+}
+
+.app-sidebar .nav-section {
+    padding: 0.5rem 1rem 0.25rem;
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.app-main {
+    min-width: 0;
+}
+
+/* 금액·수량 오른쪽 정렬 */
+.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 취소·중지된 행 */
+.row-muted,
+.row-muted td {
+    color: #6c757d;
+}
+
+/* 바뀐 줄 */
+.diff-changed {
+    font-weight: 700;
+    background-color: #fff3cd;
+}
+
+/* 필수 라벨 */
+.required::after {
+    content: " *";
+    color: var(--bs-danger);
+}
+
+/* 대시보드 숫자 */
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+/* 로그인 화면 */
+.login-main {
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 380px;
+}
+
+/* 767px 이하: 표 한 행을 카드 한 장으로 */
+@media (max-width: 767.98px) {
+    .table-stack thead {
+        display: none;
+    }
+
+    .table-stack tr {
+        display: block;
+        margin-bottom: 0.75rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+        padding: 0.5rem;
+    }
+
+    .table-stack td {
+        display: block;
+        border: 0;
+        padding: 0.125rem 0;
+        text-align: left;
+    }
+
+    .table-stack td::before {
+        content: attr(data-label) ": ";
+        font-weight: 600;
+    }
+
+    .sticky-summary {
+        position: sticky;
+        bottom: 0;
+        background-color: #fff;
+        border-top: 1px solid #dee2e6;
+        padding: 0.5rem 0;
+    }
+}

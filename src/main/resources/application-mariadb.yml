@@ -1,0 +1,9 @@
+# 나중에 MariaDB로 바꿀 때 쓰는 프로필입니다(NFR9). 지금은 쓰지 않습니다.
+# 실행 예: SPRING_PROFILES_ACTIVE=mariadb 와 아래 환경변수 세 개를 넣고 ./gradlew bootRun
+# MariaDB 드라이버(org.mariadb.jdbc:mariadb-java-client)는 전환할 때 build.gradle에 추가합니다.
+spring:
+  datasource:
+    url: ${MIRAE_DB_URL}
+    username: ${MIRAE_DB_USERNAME}
+    password: ${MIRAE_DB_PASSWORD}
+    driver-class-name: org.mariadb.jdbc.Driver

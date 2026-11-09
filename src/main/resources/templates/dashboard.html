@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: page(title='대시보드', activeMenu='dashboard', content=~{::content})}">
+<body>
+<section th:fragment="content">
+    <h1 class="h3">대시보드</h1>
+    <p data-testid="dashboard-placeholder">대시보드는 준비 중입니다.</p>
+</section>
+</body>
+</html>

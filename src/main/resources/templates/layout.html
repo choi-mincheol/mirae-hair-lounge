@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:fragment="page(title, activeMenu, content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:if="${_csrf}">
+        <meta name="_csrf" th:content="${_csrf.token}">
+        <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    </th:block>
+    <title th:text="${title} + ' - Mirae 판매 관리'">Mirae 판매 관리</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<header class="navbar navbar-expand bg-body-tertiary border-bottom px-3">
+    <button type="button" class="btn btn-outline-secondary btn-sm d-lg-none me-2" data-bs-toggle="offcanvas"
+            data-bs-target="#appSidebar" aria-controls="appSidebar" data-testid="header-menu-button"
+            sec:authorize="isAuthenticated()">메뉴</button>
+    <a class="navbar-brand" th:href="@{/}" data-testid="header-home-link">Mirae 판매 관리</a>
+    <div class="ms-auto d-flex align-items-center gap-2" sec:authorize="isAuthenticated()">
+        <span data-testid="header-user-name"
+              th:text="${#authentication.principal.displayName} + '(' + ${#authentication.principal.roleLabel} + ')'">사용자(역할)</span>
+        <a class="btn btn-link btn-sm d-none d-md-inline" th:href="@{/account/password}"
+           data-testid="header-password-link">비밀번호 변경</a>
+        <form class="d-none d-md-inline" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-outline-secondary btn-sm" data-testid="header-logout-button">로그아웃</button>
+        </form>
+    </div>
+</header>
+
+<div class="d-flex app-body">
+    <nav aria-label="주 메뉴" class="app-sidebar offcanvas-lg offcanvas-start" id="appSidebar" tabindex="-1"
+         sec:authorize="isAuthenticated()">
+        <div class="offcanvas-header d-lg-none">
+            <span class="offcanvas-title">메뉴</span>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#appSidebar"
+                    aria-label="메뉴 닫기" data-testid="nav-close-button"></button>
+        </div>
+        <div class="offcanvas-body flex-column p-0">
+            <ul class="nav flex-column w-100">
+                <li th:replace="~{layout :: navItem('dashboard', '/', '대시보드')}"></li>
+                <li class="nav-section">판매</li>
+                <li th:replace="~{layout :: navItem('sales', '/sales', '판매 목록')}"></li>
+                <li th:replace="~{layout :: navItem('sale-new', '/sales/new', '판매 등록')}"></li>
+                <li class="nav-section">상품</li>
+                <li th:replace="~{layout :: navItem('products', '/products', '상품 목록')}"></li>
+                <th:block sec:authorize="hasRole('ADMIN')">
+                    <li th:replace="~{layout :: navItem('categories', '/categories', '분류')}"></li>
+                    <li th:replace="~{layout :: navItem('receipts', '/receipts', '입고')}"></li>
+                </th:block>
+                <li th:replace="~{layout :: navItem('clients', '/clients', '거래처')}"></li>
+                <th:block sec:authorize="hasRole('ADMIN')">
+                    <li th:replace="~{layout :: navItem('approvals', '/approvals', '승인 요청')}"></li>
+                    <li th:replace="~{layout :: navItem('reports', '/reports', '실적')}"></li>
+                    <li th:replace="~{layout :: navItem('users', '/users', '직원 계정')}"></li>
+                </th:block>
+                <th:block sec:authorize="hasRole('STAFF')">
+                    <li th:replace="~{layout :: navItem('my-requests', '/my-requests', '내 요청')}"></li>
+                </th:block>
+            </ul>
+            <div class="d-md-none border-top mt-2 pt-2 px-3">
+                <a class="d-block py-1" th:href="@{/account/password}" data-testid="nav-password-link">비밀번호 변경</a>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn btn-outline-secondary btn-sm w-100 my-2"
+                            data-testid="nav-logout-button">로그아웃</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow-1 p-3 app-main" th:insert="${content}">본문</main>
+</div>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+</body>
+</html>
+
+<!-- 메뉴 한 줄. 지금 화면의 메뉴는 굵게 표시하고 aria-current="page"를 붙입니다. -->
+<li class="nav-item" th:fragment="navItem(key, href, label)">
+    <a class="nav-link" th:classappend="${activeMenu == key} ? 'active'" th:href="@{${href}}"
+       th:data-testid="'nav-' + ${key}" th:aria-current="${activeMenu == key} ? 'page'"
+       th:text="${label}">메뉴</a>
+</li>

@@ -1,0 +1,13 @@
+# 테스트 전용 설정입니다. 아래 값은 테스트에서만 쓰는 더미 값이며 실제 비밀 값이 아닙니다.
+spring:
+  datasource:
+    url: jdbc:h2:mem:mirae
+  thymeleaf:
+    cache: false
+
+mirae:
+  jwt:
+    secret: test-only-dummy-signing-key-not-a-real-secret-0123456789
+  admin:
+    login-id: test-admin
+    password: test-admin-password

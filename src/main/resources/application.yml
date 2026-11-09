@@ -1,0 +1,45 @@
+# 기본 설정: 내 PC에서만 실행합니다(NFR1). 비밀 값은 환경변수로만 받습니다(NFR3).
+server:
+  address: 127.0.0.1
+  port: 8080
+  error:
+    include-stacktrace: never
+    include-message: never
+    include-exception: false
+    include-binding-errors: never
+
+spring:
+  application:
+    name: mirae-hair-lounge
+  datasource:
+    # 데이터는 H2 파일로 남깁니다(NFR4). MariaDB로 바꿀 때는 mariadb 프로필을 씁니다(NFR9).
+    url: jdbc:h2:file:./data/mirae
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      encoding: UTF-8
+  thymeleaf:
+    cache: true
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    default-statement-timeout: 30
+
+mirae:
+  zone-id: Asia/Seoul
+  jwt:
+    # 환경변수 MIRAE_JWT_SECRET (32바이트 이상). 없으면 앱이 시작하지 않습니다.
+    secret: ${MIRAE_JWT_SECRET:}
+    expiry: 8h
+    reissue-after: 5m
+  admin:
+    # 관리자 계정이 하나도 없을 때만 씁니다(FR1.2).
+    login-id: ${MIRAE_ADMIN_LOGIN_ID:}
+    password: ${MIRAE_ADMIN_PASSWORD:}
+    name: 관리자

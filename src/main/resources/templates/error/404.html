@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: page(title='찾을 수 없음', activeMenu='', content=~{::content})}">
+<body>
+<section th:fragment="content">
+    <h1 class="h3">찾을 수 없음</h1>
+    <p data-testid="error-message">요청한 화면이나 자료를 찾을 수 없습니다.</p>
+    <a class="btn btn-primary" th:href="@{/}" data-testid="error-home-link">대시보드로</a>
+</section>
+</body>
+</html>
